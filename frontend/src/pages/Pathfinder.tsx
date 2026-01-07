@@ -26,7 +26,7 @@ export default function Pathfinder() {
     setIsTyping(true);
 
     try {
-      const response = await fetch('http://localhost:3000/pathfinder', {
+      const response = await fetch('https://ai-career-coach-app-kbcq.onrender.com/pathfinder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ interest: userMsg })
@@ -41,20 +41,20 @@ export default function Pathfinder() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/locations/counties').then(res => res.json()).then(setCounties);
+    fetch('https://ai-career-coach-app-kbcq.onrender.com/locations/counties').then(res => res.json()).then(setCounties);
   }, []);
 
   const handleCountyChange = (val: string) => {
     setSelectedCounty(val); setSelectedType(''); setInstitutions([]); setCourses(null);
-    fetch(`http://localhost:3000/locations/types?county=${val}`).then(res => res.json()).then(setTypes);
+    fetch(`https://ai-career-coach-app-kbcq.onrender.com/locations/types?county=${val}`).then(res => res.json()).then(setTypes);
   };
   const handleTypeChange = (val: string) => {
     setSelectedType(val); setSelectedInstitution(''); setCourses(null);
-    fetch(`http://localhost:3000/locations/institutions?county=${selectedCounty}&type=${val}`).then(res => res.json()).then(setInstitutions);
+    fetch(`https://ai-career-coach-app-kbcq.onrender.com/locations/institutions?county=${selectedCounty}&type=${val}`).then(res => res.json()).then(setInstitutions);
   };
   const handleInstitutionChange = (val: string) => {
     setSelectedInstitution(val);
-    fetch(`http://localhost:3000/locations/courses?county=${selectedCounty}&type=${selectedType}&institution=${val}`).then(res => res.json()).then(setCourses);
+    fetch(`https://ai-career-coach-app-kbcq.onrender.com/locations/courses?county=${selectedCounty}&type=${selectedType}&institution=${val}`).then(res => res.json()).then(setCourses);
   };
 
   // --- RENDER ---
@@ -65,8 +65,8 @@ export default function Pathfinder() {
         Ask the AI or Search the Database.
       </p>
 
-      {/* GRID LAYOUT - Aligned to top so they grow independently */}
-        <div className="responsive-grid">
+      {/* GRID LAYOUT */}
+      <div className="responsive-grid">
         
         {/* --- LEFT: AI CHAT --- */}
         <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', border: '1px solid #444' }}>
@@ -90,7 +90,6 @@ export default function Pathfinder() {
             {isTyping && <div style={{ color: '#aaa', fontStyle: 'italic' }}>AI is typing...</div>}
           </div>
 
-          {/* INPUT AREA */}
           <div style={{ display: 'flex', gap: '10px', borderTop: '1px solid #444', paddingTop: '20px' }}>
             <input 
               value={input}
@@ -159,5 +158,4 @@ export default function Pathfinder() {
   );
 }
 
-// Helper style for inputs
 const selectStyle = { width: '100%', padding: '12px', borderRadius: '8px', background: '#222', color: 'white', border: '1px solid #444' };

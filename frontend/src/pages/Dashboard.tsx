@@ -22,7 +22,8 @@ export default function Dashboard() {
   const fetchJobs = async (searchTerm: string) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/jobs?keyword=${searchTerm}`);
+      // ✅ CORRECT: Using Render URL for Job Search
+      const response = await axios.get(`https://ai-career-coach-app-kbcq.onrender.com/jobs?keyword=${searchTerm}`);
       setJobs(response.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -140,7 +141,6 @@ export default function Dashboard() {
               
               <p style={{ 
                 color: '#ccc', fontSize: '0.95rem', lineHeight: '1.5', 
-                // FIX 3: Clean up the description clipping
                 display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' 
               }}>
                 {job.job_description ? job.job_description.substring(0, 150) + "..." : "No description available."}
@@ -174,11 +174,16 @@ export default function Dashboard() {
           <h2>No jobs found. Try searching for something else!</h2>
         </div>
       )}
-{/* --- NEW SECTION: EXTERNAL RESOURCES --- */}
+
+      {/* --- EXTERNAL RESOURCES --- */}
       <div style={{ marginTop: '100px', paddingTop: '40px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '30px', color: '#ccc' }}>Still looking? Explore these top sites:</h2>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+          gap: '30px' 
+        }}>
           {externalSites.map((site) => (
             <a 
               key={site.name}
@@ -187,20 +192,28 @@ export default function Dashboard() {
               rel="noopener noreferrer"
               className="glass-card"
               style={{ 
-              
-                display: 'block', 
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
                 textDecoration: 'none', 
                 color: 'white', 
-                padding: '20px', 
+                padding: '30px', 
                 textAlign: 'center', 
-                transition: 'transform 0.2s', 
                 border: '1px solid rgba(255,255,255,0.05)',
-                height: '100%' 
+                minHeight: '150px',
+                boxSizing: 'border-box'
               }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)';
+                e.currentTarget.style.borderColor = '#00d2ff';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+              }}
             >
-              <h3 style={{ color: '#00d2ff', marginBottom: '5px' }}>{site.name}</h3>
+              <h3 style={{ color: '#00d2ff', marginBottom: '10px', fontSize: '1.5rem' }}>{site.name}</h3>
               <p style={{ fontSize: '0.9rem', color: '#aaa', margin: 0 }}>{site.desc}</p>
             </a>
           ))}
