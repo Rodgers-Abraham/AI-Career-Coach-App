@@ -14,8 +14,7 @@ Whether you are a student looking for the right university course or a graduate 
 
 ## 🔗 Live Demo
 
-* **Frontend:** [Paste your Vercel Link Here]
-* **Backend API:** [Paste your Render Link Here]
+* **Frontend:** https://ai-career-coach-app-seven.vercel.app/
 
 ---
 
