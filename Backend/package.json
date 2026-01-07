@@ -1,26 +1,29 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "AI Career Coach Backend",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node src/main.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.0.3",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "axios": "^1.13.2",
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
   }
 }
